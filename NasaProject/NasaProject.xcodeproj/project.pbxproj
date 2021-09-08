@@ -16,6 +16,7 @@
 		1E2CF26926E7C02E00F753B6 /* NasaProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CF26826E7C02E00F753B6 /* NasaProjectUITests.swift */; };
 		1E2CF27826E7C0CD00F753B6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CF27726E7C0CD00F753B6 /* Kingfisher */; };
 		1E2CF27B26E7C10400F753B6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CF27A26E7C10400F753B6 /* SnapKit */; };
+		1EF464F226E896CA0001953A /* NetworkAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 1EF464F126E896CA0001953A /* NetworkAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		1E2CF26426E7C02E00F753B6 /* NasaProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NasaProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E2CF26826E7C02E00F753B6 /* NasaProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaProjectUITests.swift; sourceTree = "<group>"; };
 		1E2CF26A26E7C02E00F753B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EF464EF26E896A70001953A /* NasaProject.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = NasaProject.xcworkspace; path = ../NasaProject.xcworkspace; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E2CF27826E7C0CD00F753B6 /* Kingfisher in Frameworks */,
+				1EF464F226E896CA0001953A /* NetworkAPI in Frameworks */,
 				1E2CF27B26E7C10400F753B6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +88,7 @@
 				1E2CF25C26E7C02E00F753B6 /* NasaProjectTests */,
 				1E2CF26726E7C02E00F753B6 /* NasaProjectUITests */,
 				1E2CF24426E7C02C00F753B6 /* Products */,
+				1E2CF28226E7F9BA00F753B6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,6 +173,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		1E2CF28226E7F9BA00F753B6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EF464EF26E896A70001953A /* NasaProject.xcworkspace */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -188,6 +200,7 @@
 			packageProductDependencies = (
 				1E2CF27726E7C0CD00F753B6 /* Kingfisher */,
 				1E2CF27A26E7C10400F753B6 /* SnapKit */,
+				1EF464F126E896CA0001953A /* NetworkAPI */,
 			);
 			productName = NasaProject;
 			productReference = 1E2CF24326E7C02C00F753B6 /* NasaProject.app */;
@@ -477,7 +490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y32KACG8U6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NasaProject/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,7 +509,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y32KACG8U6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NasaProject/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -663,6 +676,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E2CF27926E7C10400F753B6 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		1EF464F126E896CA0001953A /* NetworkAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkAPI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
