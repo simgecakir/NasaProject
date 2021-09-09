@@ -7,10 +7,8 @@
 
 import UIKit
 
-class SpiritViewController: UIViewController {
-
+class SpiritViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
 }

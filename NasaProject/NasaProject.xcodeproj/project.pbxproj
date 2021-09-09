@@ -17,7 +17,7 @@
 		1E2CF27826E7C0CD00F753B6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CF27726E7C0CD00F753B6 /* Kingfisher */; };
 		1E2CF27B26E7C10400F753B6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CF27A26E7C10400F753B6 /* SnapKit */; };
 		1EF464F226E896CA0001953A /* NetworkAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 1EF464F126E896CA0001953A /* NetworkAPI */; };
-		1EF464F426E8DBCA0001953A /* CuriosityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF464F326E8DBCA0001953A /* CuriosityViewModel.swift */; };
+		1EF464F426E8DBCA0001953A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF464F326E8DBCA0001953A /* BaseViewModel.swift */; };
 		1EF464F626E8EAD20001953A /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF464F526E8EAD20001953A /* PhotoCell.swift */; };
 		1EF464F926E8F1210001953A /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF464F826E8F1210001953A /* UIImageView + Extension.swift */; };
 		1EF464FB26E8F2C70001953A /* UICollectionViewCell + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF464FA26E8F2C70001953A /* UICollectionViewCell + Extension.swift */; };
@@ -25,6 +25,10 @@
 		1EF464FF26E901B60001953A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF464FE26E901B60001953A /* TabBarViewController.swift */; };
 		1EF4650226E903070001953A /* OpportunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF4650126E903070001953A /* OpportunityViewController.swift */; };
 		1EF4650526EA02270001953A /* SpiritViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF4650426EA02270001953A /* SpiritViewController.swift */; };
+		1EF4650726EA06260001953A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF4650626EA06260001953A /* BaseViewController.swift */; };
+		1EF4650926EA07C40001953A /* CuriosityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF4650826EA07C40001953A /* CuriosityViewModel.swift */; };
+		1EF4650B26EA0C050001953A /* OpportunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF4650A26EA0C050001953A /* OpportunityViewModel.swift */; };
+		1EF4650D26EA0C240001953A /* SpiritViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF4650C26EA0C240001953A /* SpiritViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +63,7 @@
 		1E2CF26826E7C02E00F753B6 /* NasaProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaProjectUITests.swift; sourceTree = "<group>"; };
 		1E2CF26A26E7C02E00F753B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EF464EF26E896A70001953A /* NasaProject.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = NasaProject.xcworkspace; path = ../NasaProject.xcworkspace; sourceTree = "<group>"; };
-		1EF464F326E8DBCA0001953A /* CuriosityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriosityViewModel.swift; sourceTree = "<group>"; };
+		1EF464F326E8DBCA0001953A /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		1EF464F526E8EAD20001953A /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		1EF464F826E8F1210001953A /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		1EF464FA26E8F2C70001953A /* UICollectionViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell + Extension.swift"; sourceTree = "<group>"; };
@@ -67,6 +71,10 @@
 		1EF464FE26E901B60001953A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		1EF4650126E903070001953A /* OpportunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityViewController.swift; sourceTree = "<group>"; };
 		1EF4650426EA02270001953A /* SpiritViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpiritViewController.swift; sourceTree = "<group>"; };
+		1EF4650626EA06260001953A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		1EF4650826EA07C40001953A /* CuriosityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriosityViewModel.swift; sourceTree = "<group>"; };
+		1EF4650A26EA0C050001953A /* OpportunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityViewModel.swift; sourceTree = "<group>"; };
+		1EF4650C26EA0C240001953A /* SpiritViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpiritViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				1E2CF24A26E7C02C00F753B6 /* CuriosityViewController.swift */,
-				1EF464F326E8DBCA0001953A /* CuriosityViewModel.swift */,
+				1EF4650826EA07C40001953A /* CuriosityViewModel.swift */,
 			);
 			path = Curiosity;
 			sourceTree = "<group>";
@@ -171,9 +179,9 @@
 		1E2CF27E26E7C18C00F753B6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				1EF4650326EA02100001953A /* Spirit */,
-				1EF4650026E902DE0001953A /* Opportunnity */,
 				1E2CF27D26E7C17400F753B6 /* Curiosity */,
+				1EF4650026E902DE0001953A /* Opportunnity */,
+				1EF4650326EA02100001953A /* Spirit */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -191,6 +199,8 @@
 			children = (
 				1EF464F526E8EAD20001953A /* PhotoCell.swift */,
 				1EF464FE26E901B60001953A /* TabBarViewController.swift */,
+				1EF4650626EA06260001953A /* BaseViewController.swift */,
+				1EF464F326E8DBCA0001953A /* BaseViewModel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -217,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF4650126E903070001953A /* OpportunityViewController.swift */,
+				1EF4650A26EA0C050001953A /* OpportunityViewModel.swift */,
 			);
 			path = Opportunnity;
 			sourceTree = "<group>";
@@ -225,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF4650426EA02270001953A /* SpiritViewController.swift */,
+				1EF4650C26EA0C240001953A /* SpiritViewModel.swift */,
 			);
 			path = Spirit;
 			sourceTree = "<group>";
@@ -372,12 +384,16 @@
 				1EF464FD26E8F2DB0001953A /* UICollectionView + Extension.swift in Sources */,
 				1EF4650526EA02270001953A /* SpiritViewController.swift in Sources */,
 				1E2CF24B26E7C02C00F753B6 /* CuriosityViewController.swift in Sources */,
+				1EF4650726EA06260001953A /* BaseViewController.swift in Sources */,
+				1EF4650B26EA0C050001953A /* OpportunityViewModel.swift in Sources */,
 				1EF4650226E903070001953A /* OpportunityViewController.swift in Sources */,
 				1EF464FF26E901B60001953A /* TabBarViewController.swift in Sources */,
 				1EF464F626E8EAD20001953A /* PhotoCell.swift in Sources */,
 				1E2CF24726E7C02C00F753B6 /* AppDelegate.swift in Sources */,
-				1EF464F426E8DBCA0001953A /* CuriosityViewModel.swift in Sources */,
+				1EF464F426E8DBCA0001953A /* BaseViewModel.swift in Sources */,
+				1EF4650D26EA0C240001953A /* SpiritViewModel.swift in Sources */,
 				1E2CF24926E7C02C00F753B6 /* SceneDelegate.swift in Sources */,
+				1EF4650926EA07C40001953A /* CuriosityViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

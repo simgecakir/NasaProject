@@ -27,7 +27,7 @@ class TabBarViewController: UITabBarController {
             setUpOpportunityViewController(),
             setUpSpiritViewController()
         ]
-    }
+}
         
     private func setUpCuriosityViewController() -> UIViewController {
         let curiosityVC = CuriosityViewController()
@@ -41,6 +41,7 @@ class TabBarViewController: UITabBarController {
     private func setUpOpportunityViewController() -> UIViewController {
         let opportunityVC = OpportunityViewController()
         opportunityVC.navigationItem.title = "Opportunity"
+        opportunityVC.viewModel = OpportunityViewModel(service: RoverPhotosService(roverType: .opportunity))
         let nav = UINavigationController(rootViewController: opportunityVC)
         nav.tabBarItem.title = "Opportunity"
         return nav
@@ -49,6 +50,7 @@ class TabBarViewController: UITabBarController {
     private func setUpSpiritViewController() -> UIViewController {
         let spiritVC = SpiritViewController()
         spiritVC.navigationItem.title = "Spirit"
+        spiritVC.viewModel = SpiritViewModel(service: RoverPhotosService(roverType: .spirit))
         let nav = UINavigationController(rootViewController: spiritVC)
         nav.tabBarItem.title = "Spirit"
         return nav

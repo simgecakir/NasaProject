@@ -7,8 +7,7 @@
 
 import UIKit
 
-class OpportunityViewController: UIViewController {
-
+class OpportunityViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
