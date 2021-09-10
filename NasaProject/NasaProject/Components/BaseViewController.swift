@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import NetworkAPI
 
 class BaseViewController: UIViewController {
 
@@ -30,16 +31,14 @@ class BaseViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    private func configureNavigationBar(){
+    fileprivate func configureNavigationBar(){
         
 //        let bounds = navigationController!.navigationBar.bounds
 //        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height - 20)
-        navigationController?.navigationBar.tintColor = .gray
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.barTintColor = .lightGray
     }
     
-    private func configureCollectionView() {
+    fileprivate func configureCollectionView() {
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 10
@@ -79,6 +78,11 @@ extension BaseViewController: UICollectionViewDelegate, UICollectionViewDataSour
         viewModel.loadMorePhoto(indexPath: indexPath.row)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let photo = viewModel.photo(indexPath: indexPath.row)
+        viewModel.selectedPhoto(photo: photo!)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = view.frame.width * 0.3
         return CGSize(width: size, height: size)
@@ -92,4 +96,11 @@ extension BaseViewController: BaseViewModelDelegate{
         collectionView.reloadData()
     }
     
+    func showPhotoDetail(photo: Photo){
+        let popupVC = PhotoDetailViewController()
+        popupVC.photo = photo
+        popupVC.modalTransitionStyle = .crossDissolve
+        popupVC.modalPresentationStyle = .overCurrentContext
+        present(popupVC, animated: true, completion: nil)
+    }
 }

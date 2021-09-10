@@ -16,11 +16,13 @@ protocol BaseViewModelProtocol {
     func load()
     func loadMorePhoto(indexPath: Int)
     func photo(indexPath: Int) -> Photo?
+    func selectedPhoto(photo: Photo)
 
 }
 
 protocol BaseViewModelDelegate: AnyObject {
     func reloadData()
+    func showPhotoDetail(photo: Photo)
 }
 
 class BaseViewModel{
@@ -97,4 +99,7 @@ extension BaseViewModel: BaseViewModelProtocol{
         }
     }
     
+    func selectedPhoto(photo: Photo){
+        delegate?.showPhotoDetail(photo: photo)
+    }
 }
