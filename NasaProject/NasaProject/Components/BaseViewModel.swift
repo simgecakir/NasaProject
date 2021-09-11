@@ -14,14 +14,15 @@ protocol BaseViewModelProtocol {
     var photos: [Photo] { get }
     
     func load()
-    func loadMorePhoto(indexPath: Int)
+    func loadMorePhoto()
     func photo(indexPath: Int) -> Photo?
     func selectedPhoto(photo: Photo)
-
+    func filterPhotosByCamera(camera: String)
 }
 
 protocol BaseViewModelDelegate: AnyObject {
     func reloadData()
+    func loadingView(isShown: Bool)
     func showPhotoDetail(photo: Photo)
 }
 
@@ -29,23 +30,23 @@ class BaseViewModel{
     
     weak var delegate: BaseViewModelDelegate?
     private let service: BasePhotoServiceProtocol
-    
-    private var limit = 9
-    private var total: Int?
+    private var filteredPhotos = [Photo]()
+    private var isFiltering: Bool = false
+    private var page = 1
     var photos = [Photo]()
-    var showingPhotos = [Photo]()
 
     init(service:BasePhotoServiceProtocol) {
         self.service = service
     }
 
-    func loadPhotos(){
-        service.fetchPhotos { [weak self] result in
+    private func loadPhotos(page: Int){
+        delegate?.loadingView(isShown: true)
+        service.fetchPhotos(page: page) { [weak self] result in
+            self?.delegate?.loadingView(isShown: false)
             guard let self = self else { return }
             switch result{
             case .success(let data):
                 self.photos = data
-                self.loadShowingPhotos()
                 self.delegate?.reloadData()
                 
             case .failure(let error):
@@ -54,14 +55,18 @@ class BaseViewModel{
         }
     }
     
-    private func loadShowingPhotos(){
-        if self.photos.count != 0{
-            var counter = 0
-            while counter < self.limit {
-                if counter < self.photos.count{
-                    self.showingPhotos.append(self.photos[counter])
-                }
-               counter += 1
+    private func filteredCameraPhotos(camera: String) {
+        delegate?.loadingView(isShown: true)
+        service.fetchFilteredPhotos(camera: camera) { [weak self] result in
+            self?.delegate?.loadingView(isShown: false)
+            guard let self = self else { return }
+            switch result{
+            case .success(let data):
+                self.filteredPhotos = data
+                self.delegate?.reloadData()
+    
+            case .failure(let error):
+                print(error)
             }
         }
     }
@@ -71,35 +76,55 @@ class BaseViewModel{
 extension BaseViewModel: BaseViewModelProtocol{
     
     func load() {
-        loadPhotos()
+        loadPhotos(page: page)
         self.delegate?.reloadData()
     }
     
     func photo(indexPath: Int) -> Photo? {
-        self.showingPhotos[indexPath]
+        if isFiltering {
+            return self.filteredPhotos[indexPath]
+        }
+        return self.photos[indexPath]
     }
     
     var numberOfItems: Int {
-        self.showingPhotos.count
+        if isFiltering {
+            return filteredPhotos.count
+        }
+        return self.photos.count
     }
     
-    func loadMorePhoto(indexPath: Int) {
-        
-        if indexPath == showingPhotos.count - 1 {
-            var counter = 1
-            while counter <= limit {
-                if showingPhotos.count < photos.count {
-                    showingPhotos.append(photos[indexPath + counter])
+    func loadMorePhoto() {
+        page += 1
+        delegate?.loadingView(isShown: true)
+        service.fetchPhotos(page: page) { [weak self] result in
+            guard let self = self else { return }
+            switch result{
+            case .success(let data):
+                self.photos.append(contentsOf: data)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                    self.delegate?.reloadData()
+                    self.delegate?.loadingView(isShown: false)
                 }
-                counter += 1
+                
+            case .failure(let error):
+                print(error)
             }
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-            self.delegate?.reloadData()
         }
     }
     
     func selectedPhoto(photo: Photo){
         delegate?.showPhotoDetail(photo: photo)
     }
+    
+    func filterPhotosByCamera(camera: String) {
+        if camera == "ALL"{
+            isFiltering = false
+            self.delegate?.reloadData()
+        }else{
+            isFiltering = true
+            filteredCameraPhotos(camera: camera)
+        }
+    }
+
 }

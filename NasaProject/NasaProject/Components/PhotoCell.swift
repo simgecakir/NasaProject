@@ -13,6 +13,7 @@ class PhotoCell: UICollectionViewCell {
     var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.tintColor = .gray
         return imageView
     }()
     
@@ -33,6 +34,6 @@ class PhotoCell: UICollectionViewCell {
     }
     
     func configure(photo: String){
-        imageView.loadImage(from: photo, placeHolder: nil)
+        imageView.loadImage(from: photo, placeHolder: UIImage(systemName: "photo"))
     }
 }

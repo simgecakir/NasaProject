@@ -10,5 +10,6 @@ import UIKit
 class OpportunityViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.cameraTitles = ["FHAZ","NAVCAM","PANCAM","MINITES","ENTRY","RHAZ"]
     }
 }

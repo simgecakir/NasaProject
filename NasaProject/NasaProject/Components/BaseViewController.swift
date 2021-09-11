@@ -12,6 +12,18 @@ import NetworkAPI
 class BaseViewController: UIViewController {
 
     private var collectionView: UICollectionView!
+    private var cameraPicker = UIPickerView()
+    private var filterField = FilterCategoryView()
+    var cameraTitles = [String]()
+    
+    private var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.distribution = .fill
+        view.alignment = .center
+        view.spacing = 15.0
+        return view
+    }()
     
     var viewModel: BaseViewModelProtocol! {
         didSet {
@@ -23,7 +35,11 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         configureNavigationBar()
+        configureComponents()
+        configureCameraPicker()
+        bindViews()
         viewModel.load()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,9 +49,10 @@ class BaseViewController: UIViewController {
     
     fileprivate func configureNavigationBar(){
         
-//        let bounds = navigationController!.navigationBar.bounds
-//        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height - 20)
+        let filterButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(filterButtonPressed(sender:)))
+        navigationItem.rightBarButtonItem = filterButton
         navigationController?.navigationBar.barTintColor = .lightGray
+        navigationController?.navigationBar.tintColor = .black
     }
     
     fileprivate func configureCollectionView() {
@@ -53,12 +70,68 @@ class BaseViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-
-        view.addSubview(collectionView)
+    }
+    
+    private func configureCameraPicker(){
+        
+        cameraPicker.dataSource = self
+        cameraPicker.delegate = self
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(cameraPickerSelected))
+        toolbar.setItems([doneButton], animated: true)
+        filterField.choiceTextField.inputAccessoryView = toolbar
+        filterField.choiceTextField.inputView = cameraPicker
+    }
+    
+    private func configureComponents(){
+        filterField.configure(with: FilterCategoryModel(categoryName: "Camera", categoryChoice: "ALL"))
+        self.filterField.isHidden = true
+        self.filterField.alpha = 0.0
+    }
+    
+    @objc func filterButtonPressed(sender: UIBarButtonItem){
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseOut],
+            animations: {
+                if self.filterField.isHidden == true {
+                    self.filterField.isHidden = false
+                    self.filterField.alpha = 1.0
+                }else{
+                    self.filterField.isHidden = true
+                    self.filterField.alpha = 0.0
+                }
+        })
+        stackView.layoutIfNeeded()
+    }
+    
+    @objc func cameraPickerSelected(){
+        let cameraName =  cameraTitles[cameraPicker.selectedRow(inComponent: 0)]
+        filterField.choiceTextField.text = cameraName
+        self.view.endEditing(true)
+        viewModel.filterPhotosByCamera(camera: cameraName)
+    }
+    
+    private func bindViews(){
+        
+        view.addSubview(stackView)
+        stackView.snp.makeConstraints{ (make) in
+            make.top.equalToSuperview().offset(110)
+            make.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        stackView.addArrangedSubview(filterField)
+        filterField.snp.makeConstraints{ (make) in
+            make.width.equalToSuperview().offset(-50)
+            make.height.equalTo(40)
+        }
+        
+        stackView.addArrangedSubview(collectionView)
         collectionView.snp.makeConstraints{ (make) in
-            make.top.bottom.leading.trailing.equalToSuperview()
+            make.width.equalToSuperview()
         }
     }
+    
 }
 
 extension BaseViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -74,8 +147,14 @@ extension BaseViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        viewModel.loadMorePhoto(indexPath: indexPath.row)
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+
+        if offsetY > contentHeight - height {
+            viewModel.loadMorePhoto()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -90,10 +169,30 @@ extension BaseViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
+extension BaseViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        cameraTitles.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return cameraTitles[row]
+    }
+    
+}
+
 extension BaseViewController: BaseViewModelDelegate{
     
     func reloadData() {
         collectionView.reloadData()
+    }
+    
+    func loadingView(isShown: Bool) {
+        isShown ? showLoading() : hideLoading()
     }
     
     func showPhotoDetail(photo: Photo){

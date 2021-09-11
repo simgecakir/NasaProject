@@ -8,5 +8,6 @@
 import Foundation
 
 public protocol BasePhotoServiceProtocol{
-    func fetchPhotos(completion: @escaping (Result<[Photo], PhotoError>) -> Void)
+    func fetchPhotos(page: Int, completion: @escaping (Result<[Photo], PhotoError>) -> Void)
+    func fetchFilteredPhotos(camera: String, completion: @escaping (Result<[Photo], PhotoError>) -> Void)
 }

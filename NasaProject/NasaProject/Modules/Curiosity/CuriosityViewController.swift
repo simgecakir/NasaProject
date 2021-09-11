@@ -10,5 +10,6 @@ import UIKit
 class CuriosityViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.cameraTitles = ["ALL","CHEMCAM","FHAZ","MAST","NAVCAM","RHAZ"]
     }
 }

@@ -10,7 +10,6 @@ import NetworkAPI
 
 class PhotoDetailViewController: UIViewController {
     
-    
     private let scrollView = UIScrollView()
     private let dateLabel = InfoView()
     private let roverNameLabel = InfoView()
@@ -20,7 +19,7 @@ class PhotoDetailViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -34,9 +33,9 @@ class PhotoDetailViewController: UIViewController {
     
     let stackView: UIStackView = {
         let stack = UIStackView()
-        stack.axis = NSLayoutConstraint.Axis.vertical
-        stack.distribution = UIStackView.Distribution.fillProportionally
-        stack.alignment = UIStackView.Alignment.center
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.alignment = .center
         stack.spacing = 12.0
         return stack
     }()
@@ -46,19 +45,16 @@ class PhotoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray.withAlphaComponent(0.3)
-        
         configComponents()
         bindViews()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissPopUp))
         view.addGestureRecognizer(tapGesture)
-        
        }
 
        @objc func dismissPopUp(){
            self.dismiss(animated: true, completion: nil)
        }
-
     
     private func configComponents(){
         
@@ -88,17 +84,18 @@ class PhotoDetailViewController: UIViewController {
             make.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        scrollView.addSubview(stackView)
-        stackView.snp.makeConstraints{ (make) in
-            make.top.equalToSuperview()
-            make.leading.equalTo(popupView.snp.leading).offset(10)
-            make.trailing.equalTo(popupView.snp.trailing).offset(-10)
+        scrollView.addSubview(imageView)
+        imageView.snp.makeConstraints{ (make) in
+            make.top.width.equalToSuperview()
+            make.height.equalTo(popupView.snp.height).multipliedBy(0.8)
         }
         
-        stackView.addArrangedSubview(imageView)
-        imageView.snp.makeConstraints{ (make) in
-            make.width.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.8)
+        scrollView.addSubview(stackView)
+        stackView.snp.makeConstraints{ (make) in
+            make.top.equalTo(imageView.snp.bottom).offset(20)
+            make.bottom.equalToSuperview().offset(-15)
+            make.leading.equalTo(popupView.snp.leading).offset(10)
+            make.trailing.equalTo(popupView.snp.trailing).offset(-10)
         }
         
         stackView.addArrangedSubview(dateLabel)
