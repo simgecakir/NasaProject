@@ -59,13 +59,14 @@ class BaseViewController: UIViewController {
     fileprivate func configureCollectionView() {
         
         let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 12
+        layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 12
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .black
+        collectionView.isPagingEnabled = true
         
         collectionView.register(cellType: PhotoCell.self)
         
@@ -165,7 +166,7 @@ extension BaseViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = view.frame.width * 0.2
+        let size = view.frame.width * 0.21
         return CGSize(width: size, height: size)
     }
     
