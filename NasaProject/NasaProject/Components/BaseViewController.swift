@@ -165,7 +165,7 @@ extension BaseViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = view.frame.width * 0.3
+        let size = view.frame.width * 0.2
         return CGSize(width: size, height: size)
     }
     

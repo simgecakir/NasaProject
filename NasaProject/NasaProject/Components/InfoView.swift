@@ -17,13 +17,13 @@ final class InfoView: UIView{
     
     private let titleLabel: UILabel = {
        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
     private let detailLabel: UILabel = {
        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
