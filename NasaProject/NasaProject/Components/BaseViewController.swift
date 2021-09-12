@@ -59,8 +59,8 @@ class BaseViewController: UIViewController {
     fileprivate func configureCollectionView() {
         
         let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 12
+        layout.minimumLineSpacing = 12
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -154,7 +154,7 @@ extension BaseViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.height
 
-        if offsetY > contentHeight - height {
+        if offsetY > (contentHeight - height) {
             viewModel.loadMorePhoto()
         }
     }
