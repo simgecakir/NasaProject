@@ -10,24 +10,28 @@ import XCTest
 
 class NasaProjectTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var view: MockViewController!
+    var viewModel: BaseViewModel!
+    var service: MockPhotoService!
+
+    override func setUp() {
+        super.setUp()
+        view = MockViewController()
+        service = MockPhotoService()
+        viewModel = BaseViewModel(service: service)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown() {
+        view = nil
+        viewModel = nil
+        service = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func test_fetchPhotos(){
+        XCTAssertEqual(viewModel.numberOfItems, 0)
+        viewModel.load()
+        XCTAssertEqual(viewModel.numberOfItems, 25)
+        XCTAssertEqual(viewModel.photo(indexPath: 1)?.camera.name, "FHAZ")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+    
 }

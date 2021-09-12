@@ -56,7 +56,6 @@ class BaseViewModel{
     }
     
     private func filteredCameraPhotos(camera: String) {
-        delegate?.loadingView(isShown: true)
         service.fetchFilteredPhotos(camera: camera) { [weak self] result in
             self?.delegate?.loadingView(isShown: false)
             guard let self = self else { return }
@@ -76,6 +75,7 @@ class BaseViewModel{
 extension BaseViewModel: BaseViewModelProtocol{
     
     func load() {
+        delegate?.loadingView(isShown: true)
         loadPhotos(page: page)
         self.delegate?.reloadData()
     }

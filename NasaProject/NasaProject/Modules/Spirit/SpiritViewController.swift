@@ -10,6 +10,6 @@ import UIKit
 class SpiritViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.cameraTitles = ["FHAZ","NAVCAM","PANCAM","MINITES","ENTRY","RHAZ"]
+        super.cameraTitles = ["ALL","FHAZ","NAVCAM","PANCAM","MINITES","ENTRY","RHAZ"]
     }
 }

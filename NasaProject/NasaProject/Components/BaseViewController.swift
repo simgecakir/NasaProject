@@ -13,7 +13,7 @@ class BaseViewController: UIViewController {
 
     private var collectionView: UICollectionView!
     private var cameraPicker = UIPickerView()
-    private var filterField = FilterCategoryView()
+    private var cameraFilterField = FilterCategoryView()
     var cameraTitles = [String]()
     
     private var stackView: UIStackView = {
@@ -50,6 +50,7 @@ class BaseViewController: UIViewController {
     fileprivate func configureNavigationBar(){
         
         let filterButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(filterButtonPressed(sender:)))
+        filterButton.accessibilityIdentifier = "filterButton"
         navigationItem.rightBarButtonItem = filterButton
         navigationController?.navigationBar.barTintColor = .lightGray
         navigationController?.navigationBar.tintColor = .black
@@ -81,25 +82,26 @@ class BaseViewController: UIViewController {
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(cameraPickerSelected))
         toolbar.setItems([doneButton], animated: true)
-        filterField.choiceTextField.inputAccessoryView = toolbar
-        filterField.choiceTextField.inputView = cameraPicker
+        cameraFilterField.choiceTextField.inputAccessoryView = toolbar
+        cameraFilterField.choiceTextField.inputView = cameraPicker
     }
     
     private func configureComponents(){
-        filterField.configure(with: FilterCategoryModel(categoryName: "Camera", categoryChoice: "ALL"))
-        self.filterField.isHidden = true
-        self.filterField.alpha = 0.0
+        cameraFilterField.configure(with: FilterCategoryModel(categoryName: "Camera", categoryChoice: "ALL"))
+        cameraFilterField.accessibilityIdentifier = "cameraFilterField"
+        self.cameraFilterField.isHidden = true
+        self.cameraFilterField.alpha = 0.0
     }
     
     @objc func filterButtonPressed(sender: UIBarButtonItem){
         UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseOut],
             animations: {
-                if self.filterField.isHidden == true {
-                    self.filterField.isHidden = false
-                    self.filterField.alpha = 1.0
+                if self.cameraFilterField.isHidden == true {
+                    self.cameraFilterField.isHidden = false
+                    self.cameraFilterField.alpha = 1.0
                 }else{
-                    self.filterField.isHidden = true
-                    self.filterField.alpha = 0.0
+                    self.cameraFilterField.isHidden = true
+                    self.cameraFilterField.alpha = 0.0
                 }
         })
         stackView.layoutIfNeeded()
@@ -107,7 +109,7 @@ class BaseViewController: UIViewController {
     
     @objc func cameraPickerSelected(){
         let cameraName =  cameraTitles[cameraPicker.selectedRow(inComponent: 0)]
-        filterField.choiceTextField.text = cameraName
+        cameraFilterField.choiceTextField.text = cameraName
         self.view.endEditing(true)
         viewModel.filterPhotosByCamera(camera: cameraName)
     }
@@ -120,8 +122,8 @@ class BaseViewController: UIViewController {
             make.bottom.leading.trailing.equalToSuperview()
         }
         
-        stackView.addArrangedSubview(filterField)
-        filterField.snp.makeConstraints{ (make) in
+        stackView.addArrangedSubview(cameraFilterField)
+        cameraFilterField.snp.makeConstraints{ (make) in
             make.width.equalToSuperview().offset(-50)
             make.height.equalTo(40)
         }
